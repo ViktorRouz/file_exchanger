@@ -1,0 +1,29 @@
+.register-block__register-paragraph,
+.register-block__register-text{
+  text-align: center;
+}
+
+.register-block__register-paragraph{
+  margin-top: 50px;
+}
+
+.register-block__register-text{
+  margin-bottom: 30px;
+}
+
+.register-block__register-text a{
+  margin-top: -6px;
+  padding: 0;
+}
+
+.register-block__register-text a:hover{
+  text-decoration: underline;
+}
+
+.form-group{
+  margin-bottom: 15px;
+}
+
+.form-group:nth-child(4){
+  margin-bottom: 30px;
+}

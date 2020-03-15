@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {GetImageComponent} from './get-image/get-image.component';
 import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
 import {AuthGuard} from "./guards/auth.guard";
 import {LoginGuard} from "./guards/login.guard";
 
@@ -13,6 +14,11 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [LoginGuard]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
     canActivate: [LoginGuard]
   },
   {
