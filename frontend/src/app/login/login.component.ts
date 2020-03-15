@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {ValidateService} from '../_services/validate/validate.service';
 import {AuthenticateService} from '../_services/auth/authenticate.service';
 import {NgFlashMessageService} from 'ng-flash-messages';
 import {environment} from '../../environments/environment';
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   password: string;
 
   constructor(
+    private validateService: ValidateService,
     private authService: AuthenticateService,
     private router: Router,
     private flashMessage: NgFlashMessageService,
@@ -25,12 +27,21 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  public onLoginSubmit(): any {
+  public onLoginSubmit(): boolean {
     const user = {
       email: this.email,
       password: this.password
     };
-  
+
+    // Required field
+    if (!this.validateService.validateLogin(user)) {
+      this.flashMessage.showFlashMessage({
+        messages: ['Please fill in all field'],
+        timeout: 3000,
+        type: 'danger'
+      });
+      return false;
+    }
 
     this.authService.authenticateUser(user).subscribe((data: any) => {
       if (data.success) {

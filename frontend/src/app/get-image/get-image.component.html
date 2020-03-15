@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-4">
+    <h2 class="text-center get-image__paragraph">Get file</h2>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-6 col-md-6">
+    <form class="get-image__form" (submit)="onGetSubmit()">
+      <div class="form-group">
+        <input type="text"
+               #imageId
+               [(ngModel)]="downloadImageId"
+               (change)="deleteSpaces(imageId.value, 'id')"
+               (keyup)="deleteSpaces(imageId.value, 'id')"
+               name="idImage" class="form-control"
+               placeholder="#5cd6ab4c329bea0518ca6990"
+               required autocomplete="idImage"/>
+      </div>
+      <div class="form-group d-flex">
+        <input [type]="typeDownloadImagePasswordInput"
+               #downloadPassword
+               [(ngModel)]="downloadImagePassword"
+               (change)="deleteSpaces(downloadPassword.value, 'password')"
+               (keyup)="deleteSpaces(downloadPassword.value, 'password')"
+               name="passwordDecrypt"
+               class="form-control"
+               placeholder="Password"
+               required autocomplete="password"/>
+        <div class="download-image__password-status password-status">
+          <input [(ngModel)]="showDownloadPasswordStatus"
+                 (change)="changeShowDownloadPasswordStatus()"
+                 type="checkbox"
+                 id="password-download-status__label"
+                 class="mr-3 ml-3"
+                 name="showDownloadPasswordStatus"/>
+          <label for="password-download-status__label"
+                 class="password-download-status__label">
+            <i class="far fa-eye"></i>
+          </label>
+        </div>
+      </div>
+      <div class="form-group d-flex justify-content-center get-image__button">
+        <input type="submit" class="btn btn-primary w-50" value="Get">
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-4">
+    <p class="download-block__download-text">Want to secure your files for share?</p>
+    <p class="download-block__download-text">Then <a [routerLink]="['/register']" class="btn btn-link">create a new one</a>
+    </p>
+  </div>
+</div>
+<div class="spinner spinner-bg spinner-alert" *ngIf="downloadImageStatus"></div>
+<div class="get-image__layer" *ngIf="downloadImageStatus"></div>
