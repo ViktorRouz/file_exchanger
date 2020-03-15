@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const imageScheme = new Schema({
+const fileScheme = new Schema({
   nameEncrypted: String,
   nameForAuthor: {
     type: String,
@@ -19,4 +19,4 @@ const imageScheme = new Schema({
   dateCreation: String,
 }, {versionKey: false});
 
-module.exports = mongoose.model('Image', imageScheme);
+module.exports = mongoose.model('File', fileScheme);

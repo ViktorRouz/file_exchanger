@@ -1,4 +1,3 @@
-const Image = require('../models/image');
 const User = require('../models/user');
 const multer = require('multer');
 const path = require('path');
@@ -43,7 +42,7 @@ exports.uploadPhotoProfile = (req, res, next) => {
 };
 
 exports.getPhotoProfile = (req, res, next) => {
-  filepath = path.join(__dirname, '../../public/uploads/profile/') + req.params.id;
+  filepath = path.join(__dirname, '../public/uploads/profile/') + req.params.id;
 
   res.sendFile(filepath);
 };
