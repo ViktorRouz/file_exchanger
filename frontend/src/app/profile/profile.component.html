@@ -1,0 +1,185 @@
+<section class="profile" *ngIf="user && isAccess">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <div class="profile-photo">
+        <div class="profile-photo__field">
+          <img class="profile-photo__img" [src]="photoProfileUrl" alt="">
+          <div class="profile-photo__new-img" (click)="uploadPhotoStatus = true"><h3>Upload new</h3></div>
+        </div>
+        <div class="profile-photo__delete" *ngIf="photoStatus" (click)="onDeletePhotoProfile()"></div>
+      </div>
+      <div class="profile-data">
+        <h2>{{user.name}}</h2>
+        <p class="profile-data__email">{{user.email}}</p>
+        <p class="profile-data__about"><b>About me: </b>
+          <span *ngIf="!user.aboutYourself">Something about me...</span>
+          <span *ngIf="user.aboutYourself">{{user.aboutYourself}}</span>
+        </p>
+        <div class="profile-data__upadate" (click)="onUpdateProfile()">Update info</div>
+      </div>
+    </div>
+  </div>
+  <div class="update-data-profile" *ngIf="updateProfileStatus">
+    <form (submit)="onUpdateProfileSubmit()">
+      <div class="form-group">
+        <input type="email" [(ngModel)]="name" name="name" class="form-control" placeholder="Name"/>
+      </div>
+      <div class="form-group">
+            <textarea [(ngModel)]="aboutYourself" name="aboutYourself" class="form-control"
+                      placeholder="Some text about yourself..."></textarea>
+      </div>
+      <div class="form-group d-flex justify-content-center">
+        <input type="submit" class="btn btn-primary w-50" value="Update">
+      </div>
+    </form>
+  </div>
+  <div class="upload-photo" *ngIf="uploadPhotoStatus">
+    <input class="upload-photo__input upload-photo__file" type="file" name="profilePhoto"
+           ng2FileSelect [uploader]="uploaderProfile" (onFileSelected)="onFileSelected()">
+    <button type="button" class="upload-photo__button upload-photo__upload-button"
+            *ngIf="uploaderProfile.queue !== undefined && uploaderProfile.queue.length !== 0"
+            (click)="onUploadPhotoProfile()"
+            [disabled]="uploaderProfile.queue[0].isReady || uploaderProfile.queue[0].isUploading || uploaderProfile.queue[0].isSuccess">
+      Upload
+    </button>
+    <button class="upload-photo__button upload-photo__cancel-button" (click)="closeEdit()">
+      Cancel
+    </button>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-10 col-md-8">
+      <div class="profile-upload-image">
+        <form (submit)="onUploadFileSubmit()">
+          <div class="form-group">
+            <input type="text" [(ngModel)]="imageName" name="imageName" class="form-control"
+                   autocomplete="imageName" placeholder="File name (only for you)"/>
+          </div>
+          <div class="form-group">
+            <div class="profile-upload-image__drop" ng2FileDrop
+                 [class.drop-file-over]="hasBaseDropZoneOver"
+                 [uploader]="uploaderImage"
+                 (fileOver)="fileOverBase($event)"
+                 (click)="imageInput.click()">
+              <span *ngIf="uploaderImage.queue === undefined || uploaderImage.queue.length === 0">
+                Drop or select file (click)
+              </span>
+              <span *ngIf="uploaderImage.queue !== undefined && uploaderImage.queue.length !== 0">
+                Selected file: {{fileName}}
+              </span>
+              <input #imageInput class="upload-image__file-input" type="file" name="profilePhoto"
+                     ng2FileSelect [uploader]="uploaderImage" (onFileSelected)="onFileSelected()"
+                     style="display: none"/>
+            </div>
+            <div class="upload-image__cancel-and-generate">
+              <input type="button"
+                     *ngIf="uploaderImage.queue !== undefined && uploaderImage.queue.length !== 0"
+                     (click)="onResetImage()"
+                     class="btn btn-primary upload-image__cancel"
+                     value="Cancel">
+              <input type="button"
+                     class="btn btn-primary upload-image__generate-password-button"
+                     value="Generate password"
+                     (click)="generatePassword()"/>
+            </div>
+          </div>
+          <div class="form-group d-flex justify-content-center align-items-center">
+            <input [type]="typeImagePasswordInput"
+                   [(ngModel)]="imagePassword"
+                   (keyup)="deleteSpaces($event, 'upload')"
+                   name="imagePassword"
+                   class="form-control upload-image__password"
+                   autocomplete="imagePassword"
+                   placeholder="Password"
+                   maxlength="40"/>
+            <div class="upload-image__password-status password-status">
+              <input [(ngModel)]="showPasswordStatus"
+                     (change)="changeShowPasswordStatus()"
+                     type="checkbox"
+                     id="password-status__label"
+                     class="mr-3 ml-3"
+                     name="showPasswordStatus"/>
+              <label for="password-status__label"
+                     class="password-status__label">
+                <i class="far fa-eye"></i>
+              </label>
+            </div>
+          </div>
+          <div class="form-group d-flex justify-content-center">
+            <input type="submit" class="btn btn-primary w-50" value="Create">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="download-image" *ngIf="downloadImageStatus">
+    <form (ngSubmit)="downloadImage()">
+      <div class="form-group d-flex">
+        <input [type]="typeDownloadImagePasswordInput"
+               [(ngModel)]="downloadImagePassword"
+               (keyup)="deleteSpaces($event, 'download')"
+               name="downloadImagePassword"
+               class="form-control download-image__password"
+               autocomplete="downloadImagePassword"
+               placeholder="Password"
+               maxlength="40"/>
+        <div class="download-image__password-status password-status">
+          <input [(ngModel)]="showDownloadPasswordStatus"
+                 (change)="changeShowDownloadPasswordStatus()"
+                 type="checkbox"
+                 id="password-download-status__label"
+                 class="mr-3 ml-3"
+                 name="showDownloadPasswordStatus"/>
+          <label for="password-download-status__label"
+                 class="password-download-status__label">
+            <i class="far fa-eye"></i>
+          </label>
+        </div>
+      </div>
+      <button type="submit"
+              class="download-image__button download-image__download-button"
+              *ngIf="downloadImagePasswordValid">
+        Download
+      </button>
+      <button type="reset" class="upload-photo__button upload-photo__cancel-button" (click)="closeEdit()">
+        Cancel
+      </button>
+    </form>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-10 col-md-8">
+      <div class="profile-images" *ngIf="invertedImages !== undefined && invertedImages.length">
+        <h2 class="profile-images__title">
+          List of files
+        </h2>
+        <div class="profile-images__item-image item-image"
+             *ngFor="let image of invertedImages | paginate: { itemsPerPage: 5, currentPage: p }">
+          <div class="item-image__content">
+            <div class="item-image__about">
+              <div class="item-image__name">Name: {{image.nameForAuthor}}</div>
+              <div class="item-image__id">Id for sharing: {{image._id}}</div>
+            </div>
+            <div class="item-image__buttons">
+              <p class="item-image__button"
+                 (click)="onDownloadImage(image._id, image.nameEncrypted, image.sourceExtension)">
+                <i class="fas fa-download"></i>
+              </p>
+              <p class="item-image__button" (click)="onDeleteImage(image._id)">
+                <i class="fas fa-trash-alt"></i>
+              </p>
+            </div>
+          </div>
+        </div>
+        <pagination-controls class="profile-pagination text-center"
+                             *ngIf="invertedImages !== undefined && invertedImages.length > 5"
+                             (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+  <div class="spinner spinner-bg spinner-alert" *ngIf="loadSpinnerStatus"></div>
+  <div class="profile-edit__layer"
+       *ngIf="uploadPhotoStatus
+       || updateProfileStatus
+       || downloadImageStatus
+       || loadSpinnerStatus"
+       (click)="closeEdit()"></div>
+</section>

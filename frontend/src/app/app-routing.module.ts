@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {GetImageComponent} from './get-image/get-image.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+import {ProfileComponent} from './profile/profile.component';
 import {AuthGuard} from "./guards/auth.guard";
 import {LoginGuard} from "./guards/login.guard";
 
@@ -20,6 +21,11 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     canActivate: [LoginGuard]
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '',

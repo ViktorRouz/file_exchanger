@@ -9,6 +9,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
+import {ProfileComponent} from './profile/profile.component';
 
 import {ValidateService} from './_services/validate/validate.service';
 import {AuthenticateService} from './_services/auth/authenticate.service';
@@ -27,6 +28,7 @@ import {GetImageComponent} from './get-image/get-image.component';
     AppComponent,
     RegisterComponent,
     LoginComponent,
+    ProfileComponent,
     GetImageComponent
   ],
   imports: [
