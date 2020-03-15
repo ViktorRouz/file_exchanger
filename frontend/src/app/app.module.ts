@@ -1,16 +1,45 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {HttpClientModule} from '@angular/common/http';
+
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+import {AppComponent} from './app.component';
+import {LoginComponent} from './login/login.component';
+
+
+import {AuthenticateService} from './_services/auth/authenticate.service';
+
+import {AuthGuard} from './guards/auth.guard';
+import {LoginGuard} from './guards/login.guard';
+
+import {NgxPaginationModule} from 'ngx-pagination';
+import {NgFlashMessagesModule} from 'ng-flash-messages';
+import {FileUploadModule} from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgFlashMessagesModule.forRoot(),
+    NgxPaginationModule,
+    FileUploadModule
   ],
-  providers: [],
+  providers: [
+    AuthenticateService,
+    AuthGuard,
+    LoginGuard,
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
