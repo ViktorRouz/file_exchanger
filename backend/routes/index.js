@@ -12,4 +12,7 @@ router.get('/', function(req, res, next) {
 router.post('/register', authController.register);
 router.post('/authenticate', authController.authenticate);
 
+// Profile routes
+router.get('/profile/:id', auth, authController.getProfile);
+
 module.exports = router;
