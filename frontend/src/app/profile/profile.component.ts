@@ -119,7 +119,7 @@ export class ProfileComponent implements OnInit {
 
   public hasBaseDropZoneOver = false;
 
-  @ViewChild('imageInput') imageInput;
+  @ViewChild('imageInput', {static: false}) imageInput;
 
   private getUserData(): void {
     this.aboutYourself = this.user.aboutYourself;
