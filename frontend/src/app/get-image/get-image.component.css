@@ -34,17 +34,17 @@
   z-index: 1;
 }
 
-.password-download-status__label i {
+.password-download-status__label fa {
   position: absolute;
-  top: 6px;
-  left: 5px;
-  color: #ac3911;
+  top: 0;
+  left: 7px;
+  color: #E95420;
   font-size: 25px;
   opacity: 0.4;
   transition: all .3s ease-in-out;
 }
 
-#password-download-status__label:checked ~ .password-download-status__label i {
+#password-download-status__label:checked ~ .password-download-status__label fa {
   opacity: 1;
 }
 

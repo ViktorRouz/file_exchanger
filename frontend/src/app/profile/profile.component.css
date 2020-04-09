@@ -280,17 +280,17 @@
   z-index: 1;
 }
 
-.password-status__label i {
+.password-status__label fa {
   position: absolute;
-  top: 6px;
-  left: 5px;
-  color: #ac3911;
+  top: 0;
+  left: 7px;
+  color: #E95420;
   font-size: 25px;
   opacity: 0.4;
   transition: all .3s ease-in-out;
 }
 
-#password-status__label:checked ~ .password-status__label i {
+#password-status__label:checked ~ .password-status__label fa {
   opacity: 1;
 }
 
@@ -425,14 +425,14 @@
   z-index: 1;
 }
 
-.item-image__button i {
+.item-image__button fa {
   color: #E95420;
   opacity: 0.8;
   font-size: 20px;
   transition: all .3s ease-in-out;
 }
 
-.item-image__button:hover i {
+.item-image__button:hover fa {
   color: #ac3911;
   opacity: 1;
 }
@@ -479,17 +479,17 @@
   z-index: 1;
 }
 
-.password-download-status__label i {
+.password-download-status__label fa {
   position: absolute;
-  top: 6px;
-  left: 5px;
-  color: #ac3911;
+  top: 0;
+  left: 7px;
+  color: #E95420;
   font-size: 25px;
   opacity: 0.4;
   transition: all .3s ease-in-out;
 }
 
-#password-download-status__label:checked ~ .password-download-status__label i {
+#password-download-status__label:checked ~ .password-download-status__label fa {
   opacity: 1;
 }
 

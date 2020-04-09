@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 
@@ -39,7 +40,8 @@ import {GetImageComponent} from './get-image/get-image.component';
     ReactiveFormsModule,
     NgFlashMessagesModule.forRoot(),
     NgxPaginationModule,
-    FileUploadModule
+    FileUploadModule,
+    AngularFontAwesomeModule,
   ],
   providers: [
     ValidateService,

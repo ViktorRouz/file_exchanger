@@ -100,7 +100,7 @@
                      name="showPasswordStatus"/>
               <label for="password-status__label"
                      class="password-status__label">
-                <i class="far fa-eye"></i>
+                <fa name="eye"></fa>
               </label>
             </div>
           </div>
@@ -131,7 +131,7 @@
                  name="showDownloadPasswordStatus"/>
           <label for="password-download-status__label"
                  class="password-download-status__label">
-            <i class="far fa-eye"></i>
+            <fa name="eye"></fa>
           </label>
         </div>
       </div>
@@ -161,10 +161,10 @@
             <div class="item-image__buttons">
               <p class="item-image__button"
                  (click)="onDownloadImage(image._id, image.nameEncrypted, image.sourceExtension)">
-                <i class="fas fa-download"></i>
+                <fa name="download"></fa>
               </p>
               <p class="item-image__button" (click)="onDeleteImage(image._id)">
-                <i class="fas fa-trash-alt"></i>
+                <fa name="trash"></fa>
               </p>
             </div>
           </div>
